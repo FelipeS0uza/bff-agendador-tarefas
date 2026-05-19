@@ -1,5 +1,3 @@
-#version: "3.9"
-
 services:
   postgres:
     image: postgres:latest
@@ -27,7 +25,7 @@ services:
       retries: 5
 
   usuario:
-    build: ../usuario/usuario
+    image: felipes0uza/bff-usuario
     container_name: usuario
     ports:
       - "8080:8080"
@@ -39,7 +37,7 @@ services:
       - postgres
 
   agendador-tarefas:
-    build: ../agendador-tarefas/agendador-tarefas
+    image: felipes0uza/bff-agendador-tarefas
     container_name: agendador-tarefas
     ports:
       - "8081:8081"
@@ -53,20 +51,24 @@ services:
         condition: service_healthy
 
   notificacao:
-    build: ../notificacao
+    image: felipes0uza/bff-notificacao
     container_name: notificacao
     ports:
       - "8082:8082"
 
-  bff-agendador-tarefas:
-    build: .
-    container_name: bff-agendador-tarefas
+  bff:
+    image: felipes0uza/bff
+    container_name: bff
     ports:
       - "8083:8083"
     environment:
       USUARIO_URL: usuario:8080/usuario
       AGENDADOR_TAREFAS_URL: agendador-tarefas:8081/tarefas
       NOTIFICACAO_URL: notificacao:8082/email
+    depends_on:
+      - usuario
+      - agendador-tarefas
+      - notificacao
 
 networks:
   default:
