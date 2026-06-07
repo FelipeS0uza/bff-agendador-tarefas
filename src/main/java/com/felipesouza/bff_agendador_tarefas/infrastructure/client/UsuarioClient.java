@@ -9,7 +9,9 @@ import com.felipesouza.bff_agendador_tarefas.business.dto.in.UsuarioDTORequest;
 import com.felipesouza.bff_agendador_tarefas.business.dto.out.EnderecoDTOResponse;
 import com.felipesouza.bff_agendador_tarefas.business.dto.out.TelefoneDTOResponse;
 import com.felipesouza.bff_agendador_tarefas.business.dto.out.UsuarioDTOResponse;
+import com.felipesouza.bff_agendador_tarefas.business.dto.out.ViaCepDTOResponse;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /* O OpenFeign é um cliente HTTP para a comunição entre microserviços.
@@ -50,4 +52,8 @@ public interface UsuarioClient {
 
     @PostMapping("/telefone")
     TelefoneDTOResponse cadastraTelefone(@RequestBody TelefoneDTORequest dto, @RequestHeader ("Authorization") String token);
+
+    @GetMapping("/endereco/{cep}")
+    ViaCepDTOResponse buscarDadosCep(@PathVariable("cep") String cep);
+
 }
