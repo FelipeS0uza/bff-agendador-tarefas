@@ -13,6 +13,7 @@ import com.felipesouza.bff_agendador_tarefas.business.dto.in.UsuarioDTORequest;
 import com.felipesouza.bff_agendador_tarefas.business.dto.out.EnderecoDTOResponse;
 import com.felipesouza.bff_agendador_tarefas.business.dto.out.TelefoneDTOResponse;
 import com.felipesouza.bff_agendador_tarefas.business.dto.out.UsuarioDTOResponse;
+import com.felipesouza.bff_agendador_tarefas.business.dto.out.ViaCepDTOResponse;
 import com.felipesouza.bff_agendador_tarefas.infrastructure.security.SecurityConfig;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -146,5 +147,14 @@ public class UsuarioController {
                                                                 @RequestHeader(name = "Authorization", required = false) String token) {
         //Caso esteja tudo ok, salva o novo telefone no usuario cadastrado
         return ResponseEntity.ok(usuarioService.cadastroTelefone(token, dto));
+    }
+
+    @GetMapping("/endereco/{cep}")   //Indica que o metodo é um GET
+    @Operation(summary = "Buscar dados do endereço por cep", description = "Busca dados do endereço")
+    @ApiResponse(responseCode = "200", description = "Endereço encontrado")
+    @ApiResponse(responseCode = "403", description = "Endereço não localizado")
+    @ApiResponse(responseCode = "500", description = "Erro de servidor")
+    public ResponseEntity<ViaCepDTOResponse> buscarDadosCep(@PathVariable("cep") String cep) {
+        return ResponseEntity.ok(usuarioService.buscarEnderecoPorCep(cep));
     }
 }
