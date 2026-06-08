@@ -12,18 +12,21 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
+//Essa classe é um tratador de erros do Feign Client.
 public class FeignError implements ErrorDecoder {
 
+    //Caso retorne um erro, o Feign executa esse metodo para transformar a resposta de erro em uma exceção personalizada
     @Override
     public Exception decode(String s, Response response) {
 
+        //Captura o corpo da resposta
         String mensagemErro = mensagemErro(response);
 
-
+        //Verifica o status HTTP e faz o mapeamento
         switch (response.status()) {
             case 409:
                 return new ConflictException("Erro: " + mensagemErro);
-            case 403:
+            case 404:
                 return new ResourceNotFoundException("Erro " + mensagemErro);
             case 401:
                 return new UnauthorizedException("Erro " + mensagemErro);
@@ -34,7 +37,10 @@ public class FeignError implements ErrorDecoder {
         }
     }
 
+    //Metodo responsavel por ler o corpo da resposta
     private String mensagemErro(Response response) {
+
+        //Transforma o conteúdo do body em String:
         try {
             if (Objects.isNull(response.body())){
                 return "";
