@@ -12,7 +12,6 @@ import lombok.*;
 @Builder    //Simplifica a instância de classes fornecendo os parâmetros na ordem desejada e de uma só vez.
 public class TelefoneDTORequest {
 
-
     private String numero;
     private String ddd;
 }
