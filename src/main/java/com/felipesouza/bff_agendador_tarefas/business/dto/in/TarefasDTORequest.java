@@ -4,7 +4,6 @@
 package com.felipesouza.bff_agendador_tarefas.business.dto.in;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.felipesouza.bff_agendador_tarefas.infrastructure.enums.StatusNotificacaoEnum;
 import lombok.*;
 
 import java.time.LocalDateTime;
