@@ -73,7 +73,7 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.buscarUsuarioPorEmail(email, token));
     }
 
-    @DeleteMapping("/{email}")      //Indica que é um metodo DELETE e que receberá o email na url /{email para deletar}
+    @DeleteMapping("/{email}")   //Indica que é um metodo DELETE e que receberá o email na url /{email para deletar}
     @Operation(summary = "Deleta Usuário por email", description = "Deleta usuário")
     @ApiResponse(responseCode = "200", description = "Usuário deletado com sucesso")
     @ApiResponse(responseCode = "403", description = "Usuário não encontrado")
