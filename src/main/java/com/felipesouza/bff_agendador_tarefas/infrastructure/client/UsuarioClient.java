@@ -11,7 +11,6 @@ import com.felipesouza.bff_agendador_tarefas.business.dto.out.TelefoneDTORespons
 import com.felipesouza.bff_agendador_tarefas.business.dto.out.UsuarioDTOResponse;
 import com.felipesouza.bff_agendador_tarefas.business.dto.out.ViaCepDTOResponse;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /* O OpenFeign é um cliente HTTP para a comunição entre microserviços.
